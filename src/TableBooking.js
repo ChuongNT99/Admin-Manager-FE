@@ -25,7 +25,7 @@ const TableBooking = () => {
             </tr>
           </thead>
           <tbody>
-            {bookings.map((book, key) => {
+            {bookings.map((book, key =0) => {
                     return(
                         <>
                         <tr key={book.bookings_id}>
