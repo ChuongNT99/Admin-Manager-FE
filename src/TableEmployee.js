@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import {FiEdit3} from 'react-icons/fi'
+import {GrUpdate}from 'react-icons/gr'
 import {RiDeleteBin6Fill} from 'react-icons/ri'
 const url ='https://f255-210-245-110-144.ngrok-free.app/'
 const TableEmployee = () => {
@@ -31,7 +32,7 @@ const TableEmployee = () => {
     }
     const handleEdit = (id) => {
         setEditID(id)
-    }
+      }
     const handleUpdate = () => {
         axios.put(url +'/employee/' + editId, { employees_id: editId, employees_name: name, email: email, phone_number: number })
             .then(res => {
@@ -50,13 +51,14 @@ const TableEmployee = () => {
         })
         .catch(er=> console.log(er))
     }
+
     return (
         <div className='container'>
             <div className='form-div gap-3'>
-                <form className='form-control' onSubmit={handleSubmit} action='' >
-                    <input className='form-control mt-2' type='text' placeholder='Enter Name ' onChange={e => setName(e.target.value)} />
-                    <input className='form-control mt-2' type='text' placeholder='Enter Email' onChange={e => setEmail(e.target.value)} />
-                    <input className='form-control mt-2' type='text' placeholder='Enter Phone Number' onChange={e => setNumber(e.target.value)} />
+                <form className='form-control' onSubmit={handleSubmit} action='' re >
+                    <input className='form-control mt-2' type='text' placeholder='Enter Name ' onChange={e => setName(e.target.value)} required />
+                    <input className='form-control mt-2' type='text' placeholder='Enter Email' onChange={e => setEmail(e.target.value)}  required/>
+                    <input className='form-control mt-2' type='text' placeholder='Enter Phone Number' onChange={e => setNumber(e.target.value)}  required/>
                     <button className='form-control mt-2 btn-secondary btn-lg' onClick={handleSubmit}>Add</button>
                 </form>
             </div>
@@ -72,32 +74,30 @@ const TableEmployee = () => {
                 </thead>
                 <tbody>
                     {employees.map((employee, key) => {
-                        return(<>
-                       
-                    
+                        return(<>    
                         <tr key={employee.employees_id}>
                         <td>{employee.employees_id}</td>
                         <td>{editId === employee.employees_id ? (
-                            <input type='text' value={name} onChange={e => setName(e.target.value)} />
+                            <input type='text' value={name} onChange={e => setName(e.target.value)}   required />
                         ) : (
                             employee.employees_name
                         )}
                         </td>
                         <td>{editId === employee.employees_id ? (
-                            <input type='text' value={email} onChange={e => setEmail(e.target.value)} />
+                            <input type='email' value={email} onChange={e  => setEmail(e.target.value)} required />
                         ) : (
                             employee.email
                         )}
                         </td>
                         <td>{editId === employee.employees_id ? (
-                            <input type='text' value={number} onChange={e => setNumber(e.target.value)} />
+                            <input type='number' maxLength={10} value={number} onChange={e=> setNumber(e.target.value)} required />
                         ) : (
                             employee.phone_number
                         )}
                         </td>
                         <td>
                             {editId === employee.employees_id ? (
-                                <button onClick={handleUpdate}>Update</button>
+                                <GrUpdate onClick={ handleUpdate}/>
                             ) : (
                                 <FiEdit3 onClick={() => handleEdit(employee.employees_id)} style={{color: "blue"}}/>
                             )}
