@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import {FiEdit3} from 'react-icons/fi'
 import {RiDeleteBin6Fill} from 'react-icons/ri'
+import {GrUpdate} from 'react-icons/gr'
 const url ='https://f255-210-245-110-144.ngrok-free.app/'
 const TableEmployee = () => {
     const [employees, setEmployees] = useState([])
@@ -71,7 +72,7 @@ const TableEmployee = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {employees.map((employee, key) => {
+                    {employees.map((employee) => {
                         return(<>
                        
                     
@@ -97,7 +98,7 @@ const TableEmployee = () => {
                         </td>
                         <td>
                             {editId === employee.employees_id ? (
-                                <button onClick={handleUpdate}>Update</button>
+                                <GrUpdate onClick={handleUpdate} />
                             ) : (
                                 <FiEdit3 onClick={() => handleEdit(employee.employees_id)} style={{color: "blue"}}/>
                             )}
